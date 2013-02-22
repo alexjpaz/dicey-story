@@ -11,6 +11,12 @@
 	    		<input ng-model='new_settings.maxDie' />
 	    	</div>
 	    </div>
+	    <div class='control-group'>
+	    	<label class='control-label'>Font Set</label>
+	    	<div class='controls'>
+	    		<select disabled ng-model='new_settings.fontset' ng-options='key as o for (key,o) in fontSet' />
+	    	</div>
+	    </div>
 	    <hr />
 	    <div class='control-group'>
 	    	<label class='control-label'><span class='label label-important'>Debug Mode</span></label>

@@ -58,6 +58,7 @@
 		
 		$scope.settings = {
 			maxDie: 9,
+			fontset: 'EFON'
 		};
 		
 		
@@ -72,7 +73,15 @@
 		});
 	});
 	
-	game.controller('DiceGameSettingsCtrl', function($scope) {
+	game.factory('FontSet', function() {
+		return {
+			EFON: 'EFON by Ninja',
+		};
+	});
+	
+	game.controller('DiceGameSettingsCtrl', function($scope, FontSet) {
+		$scope.fontSet = FontSet;
+		
 		$scope.new_settings = angular.copy($scope.settings);
 		
 		$scope.saveChanges = function() {
