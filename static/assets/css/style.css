@@ -9,11 +9,40 @@ body {
 	width: 700px;
 }
 
+media (min-width: 480px) and (max-width: 768px) {
+	
+	.game-container {
+		width: 100%;
+	}
+	
+	.game-board-container {
+		width: auto;
+	}
+}
+
+
+@media (max-width: 480px) {
+	
+	body {
+		padding-top: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	.game-container {
+		width: 100%;
+	}
+	
+	.game-board-container {
+		width: auto;
+	}
+}
+
 .game-board-container {
 	border: 4px #eee solid;
 	border-radius: 8px;
-	width: 384px;
-	margin: 0 auto 20px;;
+	width: auto;
+	margin: 0 auto 20px;
 }
 
 .game-board {
