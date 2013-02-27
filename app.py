@@ -19,8 +19,13 @@ def root():
 def assets(filename):
     return	send_from_directory('static/assets', filename)
     
+@app.route('/game/', methods=['POST'])
+def add_game():
+    print request
+    
+    
 @app.route('/game/<game_id>')
-@app.route('/game', defaults={'game_id': None})
+@app.route('/game/', defaults={'game_id': None})
 def get_games(game_id):
     if game_id == None:
         games = []
@@ -31,14 +36,16 @@ def get_games(game_id):
         json = jsonify(games=games)
             
     else:
-        game = Game.query.get(game_id)._asdict()
+        game = Game.query.get(game_id)
         
         if game == None:
             return 404
         
-        json = jsonify(game)
+        json = jsonify(game._asdict())
     
     return json    
+
+
 
 class DictSerializable(object):
     def _asdict(self):

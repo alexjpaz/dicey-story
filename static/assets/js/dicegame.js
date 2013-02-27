@@ -1,5 +1,5 @@
 (function(){
-	var game = angular.module('DiceGame',['Utilities']);
+	var game = angular.module('DiceGame',['Utilities', 'ngResource']);
 	
 	game.factory('DiceGame', function(DiceSet, GameException) {
 		function DiceGame(config) {
@@ -54,12 +54,26 @@
 		return DiceSet;
 	});
 	
-	game.controller('DiceGameCtrl', function($scope, DiceGame){
+	game.factory('GameResource', function($resource) {
+		return $resource('/game/:gameId');
+	});
+	
+	game.controller('DiceGameCtrl', function($scope, $location, $routeParams, DiceGame , GameResource){
+		
+		console.log($routeParams, $location.search())
 		
 		$scope.settings = {
 			maxDie: 9,
 			fontset: 'EFON'
 		};
+		
+		$scope.loadGame = function(gameId) {
+			var gameObj = GameResource.get({gameId:gameId});
+			
+			$scope.game = new DiceGame({
+				game: gameObj
+			});
+		}
 		
 		
 		$scope.reset = function() {
@@ -70,6 +84,10 @@
 		
 		$scope.$on('GameSettingsUpdated', function(event, settings){
 			$scope.settings = settings;
+		});
+		
+		$scope.$on('$routeChangeSuccess', function(event, route){
+			$scope.loadGame(route.params.game);
 		});
 	});
 	
