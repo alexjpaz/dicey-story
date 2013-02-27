@@ -1,11 +1,7 @@
 <div ng-controller='DiceGameCtrl'>
 	<div class='game-container'>
 		<h1 class='text-center'>Dicey Story</h1>
-		<div class='game-board-container'>
-			<div class='game-board row-fluid'>
-				<div class='game-die' ng-repeat='die in game.board'>{{ die }}</div>
-			</div>
-		</div>
+		<div template='game-mode-text.html'></div>
 		<div class='text-center'>
 			<button class='btn btn-primary' ng-click='game.rollDie()'>Roll</button>
 			<button class='btn' ng-click='reset()'>Reset</button>
